@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Name — Phonetician</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F2EE;
+    --surface: #EDE8E0;
+    --teal: #2A6666;
+    --teal-light: #3D8080;
+    --teal-pale: #D4E8E8;
+    --terra: #B5614A;
+    --terra-pale: #F0DDD8;
+    --text: #1E2A2A;
+    --text-muted: #4A5E5E;
+    --border: rgba(42,102,102,0.15);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    z-index: 100;
+  }
+
+  .nav-name {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  section { padding: 5rem 2.5rem; max-width: 860px; margin: 0 auto; }
+
+  #about {
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    color: var(--terra);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .hero-name {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    color: var(--teal);
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 1.8rem;
+    line-height: 1.8;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+    padding: 0.55rem 1.3rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--teal-light); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--teal);
+    padding: 0.55rem 1.3rem;
+    border: 1.5px solid var(--teal);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: var(--teal-pale); }
+
+  .waveform-wrap {
+    opacity: 0.22;
+    flex-shrink: 0;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: 1.75rem;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--teal-pale);
+  }
+
+  .cv-entry {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0.5rem 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cv-entry:last-child { border-bottom: none; }
+
+  .cv-year {
+    font-size: 0.85rem;
+    color: var(--terra);
+    padding-top: 0.15rem;
+    font-weight: 500;
+  }
+
+  .cv-title {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .cv-place {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .cv-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--teal-pale);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .cv-download:hover { border-color: var(--teal); }
+
+  .script-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .script-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.4rem;
+    transition: border-color 0.2s;
+  }
+  .script-card:hover { border-color: var(--teal); }
+
+  .script-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background: var(--teal-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .script-icon svg { width: 18px; height: 18px; stroke: var(--teal); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+  .script-name {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+
+  .script-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .script-link {
+    font-size: 0.8rem;
+    color: var(--terra);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .script-link:hover { text-decoration: underline; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .contact-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra);
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .contact-value a { color: var(--teal); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  footer {
+    background: var(--teal);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Your Name</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#praat">Praat Scripts</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="about">
+  <div style="display:grid; grid-template-columns:1fr auto; gap:3rem; align-items:center;">
+    <div>
+      <p class="hero-eyebrow">Phonetician · Linguist</p>
+      <h1 class="hero-name">Your Name</h1>
+      <p class="hero-bio">I study the sounds of language — how they're produced, perceived, and patterned across the world's languages. I'm based at [University], working on [research area]. I also write Praat scripts so you don't have to.</p>
+      <div class="hero-links">
+        <a href="#cv" class="btn-primary">View CV</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
+    </div>
+    <div class="waveform-wrap">
+      <svg width="120" height="180" viewBox="0 0 120 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="80" width="6" height="20" rx="3" fill="#2A6666"/>
+        <rect x="22" y="60" width="6" height="60" rx="3" fill="#2A6666"/>
+        <rect x="34" y="40" width="6" height="100" rx="3" fill="#2A6666"/>
+        <rect x="46" y="55" width="6" height="70" rx="3" fill="#2A6666"/>
+        <rect x="58" y="30" width="6" height="120" rx="3" fill="#B5614A"/>
+        <rect x="70" y="50" width="6" height="80" rx="3" fill="#B5614A"/>
+        <rect x="82" y="65" width="6" height="50" rx="3" fill="#2A6666"/>
+        <rect x="94" y="75" width="6" height="30" rx="3" fill="#2A6666"/>
+        <rect x="106" y="82" width="6" height="16" rx="3" fill="#2A6666"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="cv">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">Curriculum Vitae</h2>
+
+  <div class="cv-entry">
+    <div class="cv-year">2022 – present</div>
+    <div>
+      <div class="cv-title">Postdoctoral Researcher</div>
+      <div class="cv-place">Department of Linguistics, University of X</div>
+      <div class="cv-desc">Research on prosody and intonation in [language family]. Teaching phonetics lab courses.</div>
+    </div>
+  </div>
+
+  <div class="cv-entry">
+    <div class="cv-year">2017 – 2022</div>
+    <div>
+      <div class="cv-title">PhD in Linguistics</div>
+      <div class="cv-place">University of Y</div>
+      <div class="cv-desc">Dissertation: <em>"[Your dissertation title here]"</em>. Supervised by Prof. [Name].</div>
+    </div>
+  </div>
+
+  <div class="cv-entry">
+    <div class="cv-year">2014 – 2017</div>
+    <div>
+      <div class="cv-title">BA in Linguistics & Phonetics</div>
+      <div class="cv-place">University of Z</div>
+      <div class="cv-desc">First class honours. Thesis on [topic].</div>
+    </div>
+  </div>
+
+  <a href="#" class="cv-download">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download full CV (PDF)
+  </a>
+</section>
+
+<section id="praat">
+  <p class="section-label">Tools</p>
+  <h2 class="section-title">Praat Scripts</h2>
+
+  <div class="script-grid">
+    <div class="script-card">
+      <div class="script-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="script-name">Batch formant extractor</div>
+      <div class="script-desc">Extracts F1–F3 from a folder of TextGrid-aligned wav files. Outputs a CSV ready for R.</div>
+      <a href="#" class="script-link">Download .praat →</a>
+    </div>
+
+    <div class="script-card">
+      <div class="script-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+      </div>
+      <div class="script-name">Pitch tracker</div>
+      <div class="script-desc">Automatically tracks f0 at equidistant points, with configurable floor/ceiling and smoothing.</div>
+      <a href="#" class="script-link">Download .praat →</a>
+    </div>
+
+    <div class="script-card">
+      <div class="script-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3"/></svg>
+      </div>
+      <div class="script-name">Segment aligner</div>
+      <div class="script-desc">Semi-automated TextGrid creation with boundary detection for consonants and vowels.</div>
+      <a href="#" class="script-link">Download .praat →</a>
+    </div>
+
+    <div class="script-card">
+      <div class="script-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <div class="script-name">VOT measurer</div>
+      <div class="script-desc">Measures voice onset time from annotated stop consonants. Handles prenasalised stops.</div>
+      <a href="#" class="script-link">Download .praat →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">Say hello</p>
+  <h2 class="section-title">Contact</h2>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <span class="contact-label">Email</span>
+      <span class="contact-value"><a href="mailto:you@university.edu">you@university.edu</a></span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Office</span>
+      <span class="contact-value">Room 000, Linguistics Building<br/>University of X</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-label">Online</span>
+      <span class="contact-value">
+        <a href="#">Academia.edu</a> · <a href="#">GitHub</a> · <a href="#">ORCID</a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Your Name · Made with care
+</footer>
+
+</body>
+</html>
