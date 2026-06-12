@@ -344,43 +344,25 @@
 
 <section id="praat">
   <p class="section-label">Tools</p>
-  <h2 class="section-title">Praat Scripts and Other Coding Resources</h2>
+  <h2 class="section-title">Phonetic Analysis Scripts</h2>
 
   <div class="script-grid">
     <div class="script-card">
       <div class="script-icon">
         <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
-      <div class="script-name">Batch formant extractor</div>
-      <div class="script-desc">Extracts F1–F3 from a folder of TextGrid-aligned wav files. Outputs a CSV ready for R.</div>
-      <a href="#" class="script-link">Download .praat →</a>
-    </div>
-
-    <div class="script-card">
-      <div class="script-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
-      </div>
-      <div class="script-name">Pitch tracker</div>
-      <div class="script-desc">Automatically tracks f0 at equidistant points, with configurable floor/ceiling and smoothing.</div>
-      <a href="#" class="script-link">Download .praat →</a>
-    </div>
-
-    <div class="script-card">
-      <div class="script-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3"/></svg>
-      </div>
-      <div class="script-name">Segment aligner</div>
-      <div class="script-desc">Semi-automated TextGrid creation with boundary detection for consonants and vowels.</div>
-      <a href="#" class="script-link">Download .praat →</a>
+      <div class="script-name">Intervocalic Token Finder</div>
+      <div class="script-desc">Identifies and marks intervocalic consonants in a TextGrid. Customize your target consonants and flanking vowels. Outputs to a new targets tier.</div>
+      <a href="Intervocalic_Token_Finder.praat" download class="script-link">Download .praat →</a>
     </div>
 
     <div class="script-card">
       <div class="script-icon">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       </div>
-      <div class="script-name">VOT measurer</div>
-      <div class="script-desc">Measures voice onset time from annotated stop consonants. Handles prenasalised stops.</div>
-      <a href="#" class="script-link">Download .praat →</a>
+      <div class="script-name">Intervocalic Lenition Export</div>
+      <div class="script-desc">Measures intensity drop across intervocalic consonants using ((V1max + V2max) / 2) − Cmin. Exports a tab-delimited .txt file ready for R or Excel.</div>
+      <a href="Intervocalic_Lenition_Export.praat" download class="script-link">Download .praat →</a>
     </div>
   </div>
 </section>
